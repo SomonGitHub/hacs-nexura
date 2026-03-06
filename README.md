@@ -41,11 +41,14 @@ Nexura est une intégration personnalisée (Custom Component) pour Home Assistan
       Une colonne claire, fluide, et indépendante de votre grand écran !
       <br><br>
       <p align="center">
-        <img src="https://raw.githubusercontent.com/SomonGitHub/hacs-nexura/master/docs/images/mobile.png" alt="Nexura Mobile View" width="250"/>
+        <img src="https://raw.githubusercontent.com/SomonGitHub/hacs-nexura/master/docs/images/Nexura mobile.png" alt="Nexura Mobile View" width="250"/>
       </p>
     </td>
   </tr>
 </table>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/SomonGitHub/hacs-nexura/master/docs/images/Capture d'écran Nexura 3.png" alt="Nexura Dashboard Desktop View" width="100%"/>
+</p>
 
 ---
 
