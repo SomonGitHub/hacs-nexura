@@ -1,5 +1,9 @@
 # Nexura Dashboard
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/SomonGitHub/hacs-nexura/master/brand/logo.png" alt="Nexura Logo" width="150"/>
+</p>
+
 Nexura est un tableau de bord moderne indépendant pour Home Assistant, conçu pour offrir une expérience utilisateur unique sur **tous vos écrans**.
 
 ![Desktop View](https://raw.githubusercontent.com/SomonGitHub/hacs-nexura/master/docs/images/desktop.png)

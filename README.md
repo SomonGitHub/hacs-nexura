@@ -2,6 +2,10 @@
   <img src="https://raw.githubusercontent.com/SomonGitHub/hacs-nexura/master/docs/images/Capture d'écran Nexura 1.png" alt="Nexura Dashboard Desktop View" width="100%"/>
 </p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/SomonGitHub/hacs-nexura/master/brand/logo.png" alt="Nexura Logo" width="200"/>
+</p>
+
 # Nexura Dashboard
 
 Nexura est une intégration personnalisée (Custom Component) pour Home Assistant offrant un **tableau de bord nouvelle génération**. Conçu avec React et la philosophie "Bento UI", il propose une interface utilisateur fluide, moderne (Glassmorphism), hautement personnalisable et **totalement responsive**.
