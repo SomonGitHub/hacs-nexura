@@ -18,6 +18,7 @@
     -webkit-user-select: none;
     /* Isolate repaints to individual tiles for GPU perf */
     contain: layout style;
+    container-type: inline-size;
 }
 
 .bento-tile.no-padding {
@@ -257,7 +258,7 @@ body.theme-light .btn-tile-action {
 }
 
 /* Mobile specific spans to avoid breaking layout */
-@media (max-width: 480px) {
+@media (max-width: 767px) {
 
     .tile-mini {
         height: auto;
