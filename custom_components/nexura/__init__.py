@@ -16,6 +16,7 @@ from .const import (
     CONF_DAY_NIGHT_CYCLE,
     CONF_WEATHER_EFFECTS,
     WEATHER_EFFECTS_ALL,
+    CONF_TILE_THEMES,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -121,11 +122,13 @@ async def ws_get_config(hass: HomeAssistant, connection: websocket_api.ActiveCon
         weather_effects = entry.options.get(
             CONF_WEATHER_EFFECTS, WEATHER_EFFECTS_ALL
         )
+        tile_themes_enabled = entry.options.get(CONF_TILE_THEMES, True)
         connection.send_result(msg["id"], {
             "theme": theme,
             "screensaver_enabled": screensaver_enabled,
             "day_night_cycle": day_night_cycle,
             "weather_effects": weather_effects,
+            "tile_themes_enabled": tile_themes_enabled,
         })
     else:
         connection.send_result(msg["id"], {
@@ -133,5 +136,6 @@ async def ws_get_config(hass: HomeAssistant, connection: websocket_api.ActiveCon
             "screensaver_enabled": True,
             "day_night_cycle": True,
             "weather_effects": WEATHER_EFFECTS_ALL,
+            "tile_themes_enabled": True,
         })
 

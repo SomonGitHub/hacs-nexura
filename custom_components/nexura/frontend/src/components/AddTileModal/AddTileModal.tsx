@@ -1,6 +1,6 @@
 import React from 'react';
 import type { HassEntities } from 'home-assistant-js-websocket';
-import type { TileData, TileType } from '../../App';
+import type { TileData, TileType, TileTheme } from '../../App';
 import type { TileSize } from '../BentoTile/BentoTile';
 import './AddTileModal.css';
 
@@ -21,6 +21,7 @@ export const AddTileModal: React.FC<AddTileModalProps> = ({ isOpen, onClose, onA
     const [room, setRoom] = React.useState(defaultRoom || '');
     const [isScannerOpen, setIsScannerOpen] = React.useState(false);
     const [searchTerm, setSearchTerm] = React.useState('');
+    const [tileTheme, setTileTheme] = React.useState<TileTheme | ''>('');
 
     React.useEffect(() => {
         if (tileToEdit && isOpen) {
@@ -29,6 +30,7 @@ export const AddTileModal: React.FC<AddTileModalProps> = ({ isOpen, onClose, onA
             setSize(tileToEdit.size || 'small');
             setEntityId(tileToEdit.entityId || '');
             setRoom(tileToEdit.room || '');
+            setTileTheme(tileToEdit.tileTheme || '');
         } else if (isOpen) {
             // Reset for new tile
             setTitle('');
@@ -36,6 +38,7 @@ export const AddTileModal: React.FC<AddTileModalProps> = ({ isOpen, onClose, onA
             setSize('small');
             setEntityId('');
             setRoom(defaultRoom || '');
+            setTileTheme('');
         }
     }, [tileToEdit, isOpen, defaultRoom]);
 
@@ -68,6 +71,8 @@ export const AddTileModal: React.FC<AddTileModalProps> = ({ isOpen, onClose, onA
             isOn: type === 'toggle' ? (entity ? entity.state === 'on' : false) : undefined,
             value: type === 'slider' ? (entity?.attributes?.brightness ? Math.round((entity.attributes.brightness / 255) * 100) : 0) : undefined,
             graphData: type === 'graph' ? [] : undefined,
+            tileTheme: tileTheme || undefined,
+            isFavorite: tileToEdit?.isFavorite,
         };
 
         onAdd(newTile);
@@ -78,6 +83,7 @@ export const AddTileModal: React.FC<AddTileModalProps> = ({ isOpen, onClose, onA
         setSize('small');
         setEntityId('');
         setRoom(defaultRoom || '');
+        setTileTheme('');
         setIsScannerOpen(false);
         setSearchTerm('');
     };
@@ -201,6 +207,18 @@ export const AddTileModal: React.FC<AddTileModalProps> = ({ isOpen, onClose, onA
                             <option value="energy-gauge">Jauge Énergie (Gauge)</option>
                             <option value="energy-flow">Flux Énergie (Flow)</option>
                             <option value="spacer">Espace (Spacer)</option>
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Thème visuel (Optionnel)</label>
+                        <select value={tileTheme} onChange={(e) => setTileTheme(e.target.value as TileTheme | '')}>
+                            <option value="">Par défaut (Glass)</option>
+                            <option value="solid">Couleur Pleine (Solid)</option>
+                            <option value="gradient">Dégradé (Gradient)</option>
+                            <option value="minimal">Minimaliste (Minimal)</option>
+                            <option value="neon">Néon lumineux (Neon)</option>
+                            <option value="frosted">Verre givré (Frosted)</option>
                         </select>
                     </div>
 

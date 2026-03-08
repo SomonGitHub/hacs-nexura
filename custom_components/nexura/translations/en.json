@@ -27,7 +27,8 @@
                     "theme": "Preferred Theme",
                     "screensaver_enabled": "Enable Screensaver",
                     "day_night_cycle": "Day/Night Color Cycle",
-                    "weather_effects": "Weather Visual Effects"
+                    "weather_effects": "Weather Visual Effects",
+                    "tile_themes_enabled": "Enable Tile Themes"
                 }
             }
         }

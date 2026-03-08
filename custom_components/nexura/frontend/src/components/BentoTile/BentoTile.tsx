@@ -8,7 +8,7 @@ import { AdaptiveTitle } from '../AdaptiveTitle/AdaptiveTitle';
 import type { HassEntities } from 'home-assistant-js-websocket';
 import './BentoTile.css';
 
-import type { LayoutEntry } from '../../App';
+import type { LayoutEntry, TileTheme } from '../../App';
 
 export type TileSize = 'small' | 'square' | 'rect' | 'large-square' | 'large-rect' | 'mini';
 
@@ -37,6 +37,10 @@ interface BentoTileProps {
     hideHeader?: boolean;
     /** Whether any tile in the grid is currently being dragged */
     isAnyDragging?: boolean;
+    /** Visual theme preset for the tile */
+    tileTheme?: TileTheme;
+    /** Current entity state for dynamic theme variants */
+    entityState?: string;
 }
 
 /**
@@ -65,7 +69,9 @@ const areTilePropsEqual = (
         prev.forcedHaloType !== next.forcedHaloType ||
         prev.noPadding !== next.noPadding ||
         prev.hideHeader !== next.hideHeader ||
-        prev.isAnyDragging !== next.isAnyDragging
+        prev.isAnyDragging !== next.isAnyDragging ||
+        prev.tileTheme !== next.tileTheme ||
+        prev.entityState !== next.entityState
     ) {
         return false;
     }
@@ -138,6 +144,8 @@ const BentoTileInner: React.FC<BentoTileProps> = ({
     noPadding = false,
     hideHeader = false,
     isAnyDragging = false,
+    tileTheme,
+    entityState,
 }) => {
     // Determine halo type based on entity status or forced override
     const haloType = forcedHaloType || getHaloType(entityId, hassEntities);
@@ -173,6 +181,10 @@ const BentoTileInner: React.FC<BentoTileProps> = ({
     // Also disable hover/tap scale when any tile is being dragged.
     const enableLayoutAnim = !isDragging && !isOverlay && !isAnyDragging;
 
+    // Build theme CSS class
+    const themeClass = tileTheme && tileTheme !== 'glass' ? `theme-${tileTheme}` : '';
+    const stateClass = tileTheme ? (entityState === 'on' ? 'state-on' : entityState === 'off' ? 'state-off' : '') : '';
+
     return (
         <motion.div
             ref={setNodeRef}
@@ -187,7 +199,7 @@ const BentoTileInner: React.FC<BentoTileProps> = ({
                 stiffness: 300,
                 damping: 30,
             }}
-            className={`bento-tile ${layout ? '' : sizeClass} ${isSpacer ? 'tile-spacer' : ''} ${isDragging ? 'dragging' : ''} ${isDragging && !isOverlay ? 'is-dragging-original' : ''} ${isOverlay ? 'overlay' : ''} ${isEditMode ? 'edit-mode' : ''} ${noPadding ? 'no-padding' : ''} ${layout?.hidden ? 'tile-hidden' : ''} ${className}`}
+            className={`bento-tile ${layout ? '' : sizeClass} ${isSpacer ? 'tile-spacer' : ''} ${isDragging ? 'dragging' : ''} ${isDragging && !isOverlay ? 'is-dragging-original' : ''} ${isOverlay ? 'overlay' : ''} ${isEditMode ? 'edit-mode' : ''} ${noPadding ? 'no-padding' : ''} ${layout?.hidden ? 'tile-hidden' : ''} ${themeClass} ${stateClass} ${className}`}
             whileHover={!isOverlay && !isDragging && !isAnyDragging ? { scale: 1.02 } : undefined}
             whileTap={!isOverlay && !isDragging && !isEditMode ? { scale: 0.98 } : undefined}
             onClick={!isEditMode ? onClick : undefined}

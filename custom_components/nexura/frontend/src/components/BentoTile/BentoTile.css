@@ -266,3 +266,163 @@ body.theme-light .btn-tile-action {
         grid-column: span 2;
     }
 }
+
+/* ============================================================
+ * TILE THEMES — 6 visual presets
+ * Each preset overrides .bento-tile base styles.
+ * Dynamic state variants: .state-on / .state-off
+ * ============================================================ */
+
+/* ---- 1. Glass (default — no extra class needed) ---- */
+/* Base .bento-tile styles already define the glass look */
+
+/* ---- 2. Solid ---- */
+.bento-tile.theme-solid {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.bento-tile.theme-solid.state-on {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: var(--tile-accent-color, var(--accent-color));
+    border-width: 1px;
+}
+
+.bento-tile.theme-solid.state-off {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.theme-light .bento-tile.theme-solid {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .bento-tile.theme-solid.state-on {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* ---- 3. Gradient ---- */
+.bento-tile.theme-gradient {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.02) 100%);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.bento-tile.theme-gradient.state-on {
+    background: linear-gradient(135deg,
+            color-mix(in srgb, var(--tile-accent-color, var(--accent-color)) 20%, transparent) 0%,
+            rgba(255, 255, 255, 0.03) 100%);
+    border-color: color-mix(in srgb, var(--tile-accent-color, var(--accent-color)) 30%, transparent);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.bento-tile.theme-gradient.state-off {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.03) 0%,
+            rgba(255, 255, 255, 0.01) 100%);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+body.theme-light .bento-tile.theme-gradient {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 100%);
+}
+
+/* ---- 4. Minimal ---- */
+.bento-tile.theme-minimal {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: none;
+}
+
+.bento-tile.theme-minimal.state-on {
+    border-color: color-mix(in srgb, var(--tile-accent-color, var(--accent-color)) 25%, transparent);
+}
+
+.bento-tile.theme-minimal.state-off {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+body.theme-light .bento-tile.theme-minimal {
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .bento-tile.theme-minimal.state-on {
+    border-color: color-mix(in srgb, var(--tile-accent-color, var(--accent-color)) 30%, transparent);
+}
+
+/* ---- 5. Neon ---- */
+.bento-tile.theme-neon {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: var(--theme-transition), transform 0.2s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.bento-tile.theme-neon.state-on {
+    border-color: var(--tile-accent-color, var(--accent-color));
+    box-shadow:
+        0 0 12px color-mix(in srgb, var(--tile-accent-color, var(--accent-color)) 40%, transparent),
+        0 0 30px color-mix(in srgb, var(--tile-accent-color, var(--accent-color)) 15%, transparent),
+        inset 0 0 15px color-mix(in srgb, var(--tile-accent-color, var(--accent-color)) 8%, transparent);
+}
+
+.bento-tile.theme-neon.state-off {
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.theme-light .bento-tile.theme-neon {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+body.theme-light .bento-tile.theme-neon.state-on {
+    box-shadow:
+        0 0 12px color-mix(in srgb, var(--tile-accent-color, var(--accent-color)) 30%, transparent),
+        0 0 25px color-mix(in srgb, var(--tile-accent-color, var(--accent-color)) 10%, transparent);
+}
+
+/* ---- 6. Frosted ---- */
+.bento-tile.theme-frosted {
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.bento-tile.theme-frosted.state-on {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.bento-tile.theme-frosted.state-off {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.theme-light .bento-tile.theme-frosted {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow:
+        0 10px 40px rgba(8, 145, 178, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}

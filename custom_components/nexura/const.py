@@ -25,3 +25,6 @@ WEATHER_EFFECTS_OPTIONS = [
     WEATHER_EFFECTS_SUN_ONLY,
     WEATHER_EFFECTS_ALL,
 ]
+
+# Tile Themes settings
+CONF_TILE_THEMES = "tile_themes_enabled"

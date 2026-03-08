@@ -44,6 +44,7 @@ import './components/Sidebar/Sidebar.css';
 import './App.css'
 
 export type TileType = 'info' | 'toggle' | 'slider' | 'graph' | 'cover' | 'spacer' | 'media' | 'energy-gauge' | 'energy-flow';
+export type TileTheme = 'glass' | 'solid' | 'gradient' | 'minimal' | 'neon' | 'frosted';
 export type Breakpoint = 'desktop' | 'tablet' | 'mobile';
 
 export interface LayoutEntry {
@@ -79,6 +80,8 @@ export interface TileData {
   gridEntityId?: string;
   batteryEntityId?: string;
   batteryLevelEntityId?: string;
+  // Tile theme preset
+  tileTheme?: TileTheme;
 }
 
 const useBreakpoint = (): Breakpoint => {
@@ -264,6 +267,9 @@ function App() {
   const [dayNightCycle, setDayNightCycle] = useState(true);
   const [weatherEffects, setWeatherEffects] = useState<WeatherEffectsMode>('all');
 
+  // Tile Themes setting
+  const [tileThemesEnabled, setTileThemesEnabled] = useState(true);
+
   // Hass states
   const [hassEntities, setHassEntities] = useState<HassEntities>({});
   const [hassConnection, setHassConnection] = useState<Connection | null>(null);
@@ -407,12 +413,14 @@ function App() {
             screensaver_enabled?: boolean,
             day_night_cycle?: boolean,
             weather_effects?: WeatherEffectsMode,
+            tile_themes_enabled?: boolean,
           };
           if (configRes) {
             if (configRes.theme) setTheme(configRes.theme);
             if (configRes.screensaver_enabled !== undefined) setScreensaverEnabled(configRes.screensaver_enabled);
             if (configRes.day_night_cycle !== undefined) setDayNightCycle(configRes.day_night_cycle);
             if (configRes.weather_effects) setWeatherEffects(configRes.weather_effects);
+            if (configRes.tile_themes_enabled !== undefined) setTileThemesEnabled(configRes.tile_themes_enabled);
           }
         } catch (e) {
           console.warn("Could not load nexura config", e);
@@ -500,6 +508,50 @@ function App() {
     setIsAddModalOpen(true);
   }, []);
 
+  /**
+   * Find the first available grid position for a tile of given dimensions.
+   * Scans row by row, column by column, and returns the first slot where the
+   * tile fits without overlapping any existing layout entries.
+   */
+  const findFirstAvailableSlot = (
+    existingLayout: LayoutEntry[],
+    w: number,
+    h: number,
+    gridCols: number
+  ): { x: number; y: number } => {
+    // Build an occupancy grid (max 50 rows should be plenty)
+    const maxRow = 50;
+    const occupied = new Set<string>();
+
+    for (const entry of existingLayout) {
+      if (entry.hidden) continue;
+      for (let row = entry.y; row < entry.y + entry.h; row++) {
+        for (let col = entry.x; col < entry.x + entry.w; col++) {
+          occupied.add(`${col},${row}`);
+        }
+      }
+    }
+
+    // Scan row by row, then column by column
+    for (let y = 0; y < maxRow; y++) {
+      for (let x = 0; x <= gridCols - w; x++) {
+        let fits = true;
+        for (let dy = 0; dy < h && fits; dy++) {
+          for (let dx = 0; dx < w && fits; dx++) {
+            if (occupied.has(`${x + dx},${y + dy}`)) {
+              fits = false;
+            }
+          }
+        }
+        if (fits) return { x, y };
+      }
+    }
+
+    // Fallback: place below everything
+    const maxY = existingLayout.reduce((max, e) => Math.max(max, e.y + e.h), 0);
+    return { x: 0, y: maxY };
+  };
+
   const handleAddTile = (newTile: TileData) => {
     if (tileToEdit) {
       // Update existing tile
@@ -529,19 +581,30 @@ function App() {
       setLayouts(prev => {
         const updated = { ...prev };
         const viewLayout = updated[activeView] || { desktop: [], tablet: [], mobile: [] };
+
+        // Find the first available slot for each breakpoint
+        const desktopSlot = findFirstAvailableSlot(viewLayout.desktop, dims.w, dims.h, 12);
+        const tabletW = Math.min(dims.w, 8);
+        const tabletSlot = findFirstAvailableSlot(viewLayout.tablet, tabletW, dims.h, 8);
+        const mobileW = Math.min(dims.w, 4);
+        const mobileSlot = findFirstAvailableSlot(viewLayout.mobile, mobileW, dims.h, 4);
+
         updated[activeView] = {
           ...viewLayout,
-          desktop: [...viewLayout.desktop, { id: newTile.id, x: 0, y: 0, w: dims.w, h: dims.h }],
-          tablet: [...viewLayout.tablet, { id: newTile.id, x: 0, y: 0, w: Math.min(dims.w, 8), h: dims.h }],
-          mobile: [...viewLayout.mobile, { id: newTile.id, x: 0, y: 0, w: Math.min(dims.w, 4), h: dims.h }],
+          desktop: [...viewLayout.desktop, { id: newTile.id, ...desktopSlot, w: dims.w, h: dims.h }],
+          tablet: [...viewLayout.tablet, { id: newTile.id, ...tabletSlot, w: tabletW, h: dims.h }],
+          mobile: [...viewLayout.mobile, { id: newTile.id, ...mobileSlot, w: mobileW, h: dims.h }],
         };
 
         if (newTile.isFavorite && activeView !== 'favorites') {
           const favLayout = updated.favorites || { desktop: [], tablet: [], mobile: [] };
+          const favDesktop = findFirstAvailableSlot(favLayout.desktop, dims.w, dims.h, 12);
+          const favTablet = findFirstAvailableSlot(favLayout.tablet, tabletW, dims.h, 8);
+          const favMobile = findFirstAvailableSlot(favLayout.mobile, mobileW, dims.h, 4);
           updated.favorites = {
-            desktop: [...favLayout.desktop, { id: newTile.id, x: 0, y: 0, w: dims.w, h: dims.h }],
-            tablet: [...favLayout.tablet, { id: newTile.id, x: 0, y: 0, w: Math.min(dims.w, 8), h: dims.h }],
-            mobile: [...favLayout.mobile, { id: newTile.id, x: 0, y: 0, w: Math.min(dims.w, 4), h: dims.h }],
+            desktop: [...favLayout.desktop, { id: newTile.id, ...favDesktop, w: dims.w, h: dims.h }],
+            tablet: [...favLayout.tablet, { id: newTile.id, ...favTablet, w: tabletW, h: dims.h }],
+            mobile: [...favLayout.mobile, { id: newTile.id, ...favMobile, w: mobileW, h: dims.h }],
           };
         }
 
@@ -1072,6 +1135,8 @@ function App() {
                           }}
                           noPadding={tile.entityId?.startsWith('weather.') || tile.type === 'media'}
                           hideHeader={tile.entityId?.startsWith('weather.') || tile.type === 'graph' || tile.type === 'media'}
+                          tileTheme={tileThemesEnabled ? tile.tileTheme : undefined}
+                          entityState={tile.entityId ? hassEntities[tile.entityId]?.state : undefined}
                           isAnyDragging={isAnyDragging}
                         >
                           {renderTileContent(tile)}

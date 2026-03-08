@@ -20,6 +20,7 @@ from .const import (
     CONF_WEATHER_EFFECTS,
     WEATHER_EFFECTS_ALL,
     WEATHER_EFFECTS_OPTIONS,
+    CONF_TILE_THEMES,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -78,6 +79,12 @@ class NexuraOptionsFlowHandler(config_entries.OptionsFlow):
                             translation_key=CONF_WEATHER_EFFECTS,
                         )
                     ),
+                    vol.Optional(
+                        CONF_TILE_THEMES,
+                        default=self.config_entry.options.get(
+                            CONF_TILE_THEMES, True
+                        ),
+                    ): selector.BooleanSelector(),
                 }
             ),
         )
