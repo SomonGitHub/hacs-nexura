@@ -21,6 +21,12 @@ from .const import (
 
 _LOGGER = logging.getLogger(__name__)
 
+import mimetypes
+
+# Fix for Windows MIME types issues where .js and .css might be served as application/octet-stream
+mimetypes.add_type("application/javascript", ".js")
+mimetypes.add_type("text/css", ".css")
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up Nexura from a config entry."""
     
