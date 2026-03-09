@@ -488,19 +488,30 @@ function App() {
   };
 
   const handleDeleteTile = useCallback((id: string) => {
-    setTiles(prev => prev.filter(t => t.id !== id));
-    setLayouts(prev => {
-      const updated = { ...prev };
-      Object.keys(updated).forEach(view => {
-        updated[view] = {
-          desktop: updated[view].desktop.filter(l => l.id !== id),
-          tablet: updated[view].tablet.filter(l => l.id !== id),
-          mobile: updated[view].mobile.filter(l => l.id !== id),
-        };
+    setTiles(prevTiles => {
+      const updatedTiles = prevTiles.filter(t => t.id !== id);
+
+      setLayouts(prevLayouts => {
+        const updatedLayouts = { ...prevLayouts };
+        Object.keys(updatedLayouts).forEach(view => {
+          updatedLayouts[view] = {
+            desktop: (updatedLayouts[view].desktop || []).filter(l => l.id !== id),
+            tablet: (updatedLayouts[view].tablet || []).filter(l => l.id !== id),
+            mobile: (updatedLayouts[view].mobile || []).filter(l => l.id !== id),
+          };
+        });
+
+        // Auto-save on delete
+        const payload = { layout: updatedTiles, layouts: updatedLayouts, title: dashboardTitle };
+        callHAWebSocket('nexura/board/save', payload).catch(e => console.error("[Nexura Debug] Save failed on delete:", e));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+
+        return updatedLayouts;
       });
-      return updated;
+
+      return updatedTiles;
     });
-  }, []);
+  }, [dashboardTitle, callHAWebSocket]);
 
   const handleOpenEditModal = useCallback((tile: TileData) => {
     setTileToEdit(tile);
@@ -553,71 +564,87 @@ function App() {
 
   const handleAddTile = (newTile: TileData) => {
     if (tileToEdit) {
-      // Update existing tile
-      setTiles(prev => prev.map(t => t.id === tileToEdit.id ? { ...newTile, id: t.id } : t));
-      setLayouts(prev => {
-        const updated = { ...prev };
-        const viewLayout = updated[activeView] || { desktop: [], tablet: [], mobile: [] };
+      setTiles(prevTiles => {
+        const updatedTiles = prevTiles.map(t => t.id === tileToEdit.id ? { ...newTile, id: t.id } : t);
 
-        // Update layout entries for the specific tileToEdit.id
-        const updateLayoutEntry = (layoutArr: LayoutEntry[]) => layoutArr.map(l =>
-          l.id === tileToEdit.id ? { ...l, w: getSizeDimensions(newTile.size).w, h: getSizeDimensions(newTile.size).h } : l
-        );
+        setLayouts(prevLayouts => {
+          const updatedLayouts = { ...prevLayouts };
+          const viewLayout = updatedLayouts[activeView] || { desktop: [], tablet: [], mobile: [] };
 
-        updated[activeView] = {
-          desktop: updateLayoutEntry(viewLayout.desktop),
-          tablet: updateLayoutEntry(viewLayout.tablet),
-          mobile: updateLayoutEntry(viewLayout.mobile),
-        };
+          const updateLayoutEntry = (layoutArr: LayoutEntry[]) => (layoutArr || []).map(l =>
+            l.id === tileToEdit.id ? { ...l, w: getSizeDimensions(newTile.size).w, h: getSizeDimensions(newTile.size).h } : l
+          );
 
-        return updated;
+          updatedLayouts[activeView] = {
+            desktop: updateLayoutEntry(viewLayout.desktop),
+            tablet: updateLayoutEntry(viewLayout.tablet),
+            mobile: updateLayoutEntry(viewLayout.mobile),
+          };
+
+          // Auto-save on edit
+          const payload = { layout: updatedTiles, layouts: updatedLayouts, title: dashboardTitle };
+          callHAWebSocket('nexura/board/save', payload).catch(e => console.error("[Nexura Debug] Save failed on edit:", e));
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+
+          return updatedLayouts;
+        });
+
+        return updatedTiles;
       });
       setTileToEdit(null);
     } else {
       // Add new tile
-      setTiles(prev => [...prev, newTile]);
       const dims = getSizeDimensions(newTile.size);
 
-      setLayouts(prev => {
-        const updated = { ...prev };
-        // The target room is where the layout should be updated.
-        const targetRoom = newTile.room || activeView;
+      setTiles(prevTiles => {
+        const updatedTiles = [...prevTiles, newTile];
 
-        // Fix: If we are adding from the favorites view, ensure the tile is marked as favorite
-        if (activeView === 'favorites') {
-          newTile.isFavorite = true;
-        }
+        setLayouts(prevLayouts => {
+          const updatedLayouts = { ...prevLayouts };
+          const targetRoom = newTile.room || activeView;
 
-        const viewLayout = updated[targetRoom] || { desktop: [], tablet: [], mobile: [] };
+          if (activeView === 'favorites') {
+            newTile.isFavorite = true;
+          }
 
-        // Find the first available slot for each breakpoint in the target room
-        const desktopSlot = findFirstAvailableSlot(viewLayout.desktop || [], dims.w, dims.h, 12);
-        const tabletW = Math.min(dims.w, 8);
-        const tabletSlot = findFirstAvailableSlot(viewLayout.tablet || [], tabletW, dims.h, 8);
-        const mobileW = Math.min(dims.w, 4);
-        const mobileSlot = findFirstAvailableSlot(viewLayout.mobile || [], mobileW, dims.h, 4);
+          const viewLayout = updatedLayouts[targetRoom] || { desktop: [], tablet: [], mobile: [] };
+          const desktopSlot = findFirstAvailableSlot(viewLayout.desktop || [], dims.w, dims.h, 12);
+          const tabletW = Math.min(dims.w, 8);
+          const tabletSlot = findFirstAvailableSlot(viewLayout.tablet || [], tabletW, dims.h, 8);
+          const mobileW = Math.min(dims.w, 4);
+          const mobileSlot = findFirstAvailableSlot(viewLayout.mobile || [], mobileW, dims.h, 4);
 
-        updated[targetRoom] = {
-          ...viewLayout,
-          desktop: [...(viewLayout.desktop || []), { id: newTile.id, ...desktopSlot, w: dims.w, h: dims.h }],
-          tablet: [...(viewLayout.tablet || []), { id: newTile.id, ...tabletSlot, w: tabletW, h: dims.h }],
-          mobile: [...(viewLayout.mobile || []), { id: newTile.id, ...mobileSlot, w: mobileW, h: dims.h }],
-        };
-
-        // If the tile is marked as favorite AND we didn't just add it to the 'favorites' layout
-        if (newTile.isFavorite && targetRoom !== 'favorites') {
-          const favLayout = updated.favorites || { desktop: [], tablet: [], mobile: [] };
-          const favDesktop = findFirstAvailableSlot(favLayout.desktop, dims.w, dims.h, 12);
-          const favTablet = findFirstAvailableSlot(favLayout.tablet, tabletW, dims.h, 8);
-          const favMobile = findFirstAvailableSlot(favLayout.mobile, mobileW, dims.h, 4);
-          updated.favorites = {
-            desktop: [...favLayout.desktop, { id: newTile.id, ...favDesktop, w: dims.w, h: dims.h }],
-            tablet: [...favLayout.tablet, { id: newTile.id, ...favTablet, w: tabletW, h: dims.h }],
-            mobile: [...favLayout.mobile, { id: newTile.id, ...favMobile, w: mobileW, h: dims.h }],
+          updatedLayouts[targetRoom] = {
+            ...viewLayout,
+            desktop: [...(viewLayout.desktop || []), { id: newTile.id, ...desktopSlot, w: dims.w, h: dims.h }],
+            tablet: [...(viewLayout.tablet || []), { id: newTile.id, ...tabletSlot, w: tabletW, h: dims.h }],
+            mobile: [...(viewLayout.mobile || []), { id: newTile.id, ...mobileSlot, w: mobileW, h: dims.h }],
           };
-        }
 
-        return updated;
+          if (newTile.isFavorite && targetRoom !== 'favorites') {
+            const favLayout = updatedLayouts.favorites || { desktop: [], tablet: [], mobile: [] };
+            const favDesktop = findFirstAvailableSlot(favLayout.desktop || [], dims.w, dims.h, 12);
+            const favTablet = findFirstAvailableSlot(favLayout.tablet || [], tabletW, dims.h, 8);
+            const favMobile = findFirstAvailableSlot(favLayout.mobile || [], mobileW, dims.h, 4);
+            updatedLayouts.favorites = {
+              desktop: [...(favLayout.desktop || []), { id: newTile.id, ...favDesktop, w: dims.w, h: dims.h }],
+              tablet: [...(favLayout.tablet || []), { id: newTile.id, ...favTablet, w: tabletW, h: dims.h }],
+              mobile: [...(favLayout.mobile || []), { id: newTile.id, ...favMobile, w: mobileW, h: dims.h }],
+            };
+          }
+
+          // Auto-save on add
+          const payload = { layout: updatedTiles, layouts: updatedLayouts, title: dashboardTitle };
+          console.log("[Nexura Debug] Auto-saving new tile:", newTile.id, "to room:", targetRoom);
+          callHAWebSocket('nexura/board/save', payload)
+            .then(() => console.log("[Nexura Debug] Save successful"))
+            .catch(e => console.error("[Nexura Debug] Save failed on add:", e));
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+
+          return updatedLayouts;
+        });
+
+        return updatedTiles;
       });
     }
     setIsAddModalOpen(false);
