@@ -17,7 +17,7 @@ import {
   rectSortingStrategy,
 } from '@dnd-kit/sortable'
 import type { Connection, HassEntities } from 'home-assistant-js-websocket';
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { connectHass, executeService, type HassConnectionState } from './services/hass';
 import { BentoGrid } from './components/BentoGrid/BentoGrid'
@@ -262,6 +262,33 @@ function App() {
   const isInactive = useInactivity(120000); // 2 minutes induction period for ScreenSaver
   const [activeView, setActiveView] = useState('favorites');
   const [tileToEdit, setTileToEdit] = useState<TileData | null>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [gridUnitSize, setGridUnitSize] = useState(80);
+
+  // ResizeObserver to track grid width and calculate dynamic unit size (for 1:1 ratio)
+  useEffect(() => {
+    if (!gridRef.current) return;
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const width = entry.contentRect.width;
+        const cols = { desktop: 12, tablet: 8, mobile: 4 }[breakpoint];
+        // Gap is 1rem (16px) or 0.5rem (8px) on mobile
+        const gap = breakpoint === 'mobile' ? 8 : 16;
+        // Calculation: (Total Width - Total Gaps) / Columns
+        const unitSize = (width - (gap * (cols - 1))) / cols;
+
+        if (unitSize > 0) {
+          setGridUnitSize(unitSize);
+          // Update CSS variable on the grid container for CSS usage
+          gridRef.current?.style.setProperty('--grid-unit-size', `${unitSize}px`);
+        }
+      }
+    });
+
+    observer.observe(gridRef.current);
+    return () => observer.disconnect();
+  }, [breakpoint]);
 
   // Adaptive Ambiance settings
   const [dayNightCycle, setDayNightCycle] = useState(true);
@@ -713,13 +740,12 @@ function App() {
 
       const cols = { desktop: 12, tablet: 8, mobile: 4 }[breakpoint];
 
-      const gridElement = document.querySelector('.bento-grid');
-      const containerWidth = gridElement ? gridElement.clientWidth : window.innerWidth - 64;
 
-      const cellWidth = containerWidth / cols;
-      const cellHeight = 96; // 80px row height + 16px gap
+      const cellWidth = gridUnitSize;
+      const gap = breakpoint === 'mobile' ? 8 : 16;
+      const cellHeight = gridUnitSize + gap; // unit + gap
 
-      const dx = calculateGridOffset(delta.x, cellWidth, 0.6);
+      const dx = calculateGridOffset(delta.x, cellWidth + gap, 0.6);
       const dy = calculateGridOffset(delta.y, cellHeight, 0.7);
 
       const newX = Math.max(0, Math.min(cols - tileLayout.w, tileLayout.x + dx));
@@ -1141,7 +1167,7 @@ function App() {
                   items={sortableItems}
                   strategy={rectSortingStrategy}
                 >
-                  <BentoGrid>
+                  <BentoGrid ref={gridRef}>
                     {orderedAndFilteredTiles.map((tile) => {
                       const entity = tile.entityId ? hassEntities[tile.entityId] : null;
 
