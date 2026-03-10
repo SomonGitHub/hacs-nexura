@@ -1166,6 +1166,7 @@ function App() {
           tiles={tiles}
           hassEntities={hassEntities}
           onToggleLight={handleToggle}
+          onCoverAction={handleCoverAction}
         />
 
         <main>

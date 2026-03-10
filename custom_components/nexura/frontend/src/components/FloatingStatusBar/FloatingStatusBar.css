@@ -5,9 +5,18 @@
     left: 50%;
     transform: translateX(-50%);
     display: flex;
+    flex-direction: row;
+    /* Alignement horizontal */
+    justify-content: center;
+    gap: 12px;
+    /* Espace entre les pilules */
+    z-index: 100;
+}
+
+.status-pill-container {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 100;
 }
 
 .status-pill {
