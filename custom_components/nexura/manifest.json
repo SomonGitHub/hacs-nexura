@@ -4,12 +4,12 @@
   "codeowners": [
     "@SomonGitHub"
   ],
+  "config_flow": true,
   "dependencies": [
     "http"
   ],
   "documentation": "https://github.com/SomonGitHub/hacs-nexura",
-  "issue_tracker": "https://github.com/SomonGitHub/hacs-nexura/issues",
   "iot_class": "local_polling",
-  "config_flow": true,
-  "version": "0.1.12"
+  "issue_tracker": "https://github.com/SomonGitHub/hacs-nexura/issues",
+  "version": "0.1.13"
 }
