@@ -34,6 +34,7 @@ import { CoverContent } from './components/Tiles/CoverContent'
 import { MediaContent } from './components/Tiles/MediaContent'
 import { EnergyGaugeContent } from './components/Tiles/EnergyGaugeContent'
 import { EnergyFlowContent } from './components/Tiles/EnergyFlowContent'
+import { FloatingStatusBar } from './components/FloatingStatusBar/FloatingStatusBar'
 import { SceneContent } from './components/Tiles/SceneContent'
 import { WeatherOverlay, type WeatherEffectsMode } from './components/WeatherOverlay/WeatherOverlay'
 import { getHaloType } from './hooks/useTileStatus'
@@ -1160,6 +1161,12 @@ function App() {
             </div>
           </div>
         </header>
+
+        <FloatingStatusBar
+          tiles={tiles}
+          hassEntities={hassEntities}
+          onToggleLight={handleToggle}
+        />
 
         <main>
           <DndContext

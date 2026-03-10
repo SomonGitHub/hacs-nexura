@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lightbulb, X } from 'lucide-react';
-import { TileData } from '../../App';
+import type { TileData } from '../../App';
 import './FloatingStatusBar.css';
 
 interface FloatingStatusBarProps {
