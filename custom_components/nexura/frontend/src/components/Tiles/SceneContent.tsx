@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import './SceneContent.css';
 
 interface SceneContentProps {
@@ -8,6 +9,7 @@ interface SceneContentProps {
 }
 
 export const SceneContent: React.FC<SceneContentProps> = ({ onTrigger, isEditMode = false }) => {
+    const { t } = useTranslation();
     const [isTriggered, setIsTriggered] = useState(false);
 
     const handleClick = (e: React.MouseEvent) => {
@@ -36,7 +38,7 @@ export const SceneContent: React.FC<SceneContentProps> = ({ onTrigger, isEditMod
 
                 {/* Main Physical Button */}
                 <div className="scene-button-glass">
-                    <span className="scene-action-text">Activer</span>
+                    <span className="scene-action-text">{t('tiles.scene.activate')}</span>
                 </div>
 
                 {/* Celebration Ripple */}

@@ -1,0 +1,145 @@
+{
+    "translation": {
+        "welcome": "Benvenuto nella dashboard di Nexura",
+        "dashboard": "Dashboard",
+        "rooms": "Stanze",
+        "settings": "Impostazioni",
+        "favorites": "Preferiti",
+        "unknown_room": "Sconosciuto",
+        "default_tiles": {
+            "living_room": "Soggiorno",
+            "weather": "Meteo",
+            "security": "Sicurezza",
+            "consumption": "Consumo",
+            "kitchen": "Cucina",
+            "kitchen_light": "Luce Cucina",
+            "outdoor": "Esterno",
+            "global": "Globale"
+        },
+        "states": {
+            "on": "Acceso",
+            "off": "Spento",
+            "armed": "Armato",
+            "disarmed": "Disarmato",
+            "open": "Aperto",
+            "closed": "Chiuso",
+            "playing": "In riproduzione",
+            "paused": "In pausa",
+            "idle": "Inattivo",
+            "unavailable": "Non disponibile"
+        },
+        "settings_modal": {
+            "title": "Impostazioni Dashboard",
+            "general": "Generale",
+            "appearance": "Aspetto",
+            "language": "Lingua",
+            "theme": "Tema",
+            "theme_auto": "Sistema (Auto)",
+            "theme_dark": "Scuro",
+            "theme_light": "Chiaro",
+            "theme_nature": "Natura",
+            "screensaver": "Salvaschermo",
+            "screensaver_desc": "Si attiva dopo 2 minuti di inattività",
+            "day_night_cycle": "Ciclo Giorno/Notte Automatico",
+            "day_night_cycle_desc": "Il colore in accento si adatta all'ora del giorno (Solo tema scuro)",
+            "weather_effects": "Effetti Meteorologici",
+            "weather_effects_desc": "Mostra animazioni (pioggia, neve) in base al meteo",
+            "weather_effects_options": {
+                "none": "Disattivato",
+                "subtle": "Sottili",
+                "all": "Completi"
+            },
+            "tile_themes": "Temi Riquadri",
+            "tile_themes_desc": "Consente la personalizzazione visiva individuale dei riquadri",
+            "language_fr": "Francese (Français)",
+            "language_en": "Inglese (English)",
+            "save": "Salva",
+            "cancel": "Chiudi"
+        },
+        "add_tile_modal": {
+            "add_title": "Aggiungi riquadro",
+            "edit_title": "Modifica riquadro",
+            "preview": "Anteprima riquadro",
+            "form": {
+                "title": "Titolo",
+                "title_placeholder": "Es. Luce soggiorno",
+                "room": "Stanza",
+                "room_placeholder": "Es. Soggiorno",
+                "type": "Tipo di riquadro",
+                "types": {
+                    "toggle": "Pulsante toggle",
+                    "slider": "Cursore",
+                    "info": "Informazione (Sensore)",
+                    "graph": "Grafico",
+                    "cover": "Tapparelle",
+                    "media": "Lettore Multimediale",
+                    "energy-gauge": "Indicatore Energia",
+                    "energy-flow": "Flusso di Energia",
+                    "scene": "Scena",
+                    "spacer": "Spaziatore"
+                },
+                "size": "Dimensione",
+                "sizes": {
+                    "mini": "Mini (2x1)",
+                    "small": "Piccolo (2x2)",
+                    "rect": "Rettangolo (4x2)",
+                    "square": "Quadrato (4x4)",
+                    "large-rect": "Rettangolo grande (8x4)",
+                    "large-square": "Quadrato grande (8x8)"
+                },
+                "entity": "Entità (Home Assistant)",
+                "entity_placeholder": "Cerca entità...",
+                "icon_color": "Colore icona",
+                "icon": "Icona",
+                "icon_placeholder": "Es. Lightbulb",
+                "icon_help": "Usa un nome dell'icona Tabler (es. Lightbulb, Droplet, Sun, Moon). Lascia vuoto per auto.",
+                "theme": "Tema visivo (Preset)",
+                "themes": {
+                    "glass": "Vetro",
+                    "solid": "Tinta unita",
+                    "gradient": "Gradiente",
+                    "minimal": "Minimalista",
+                    "neon": "Neon",
+                    "frosted": "Smerigliato"
+                },
+                "energy": {
+                    "max_power": "Potenza Max (W)",
+                    "grid_entity": "Entità Rete",
+                    "solar_entity": "Entità Solare",
+                    "battery_entity": "Entità Batteria (W)",
+                    "battery_level_entity": "Entità Livello Batteria (%)"
+                }
+            },
+            "cancel": "Annulla",
+            "save": "Salva",
+            "add": "Aggiungi"
+        },
+        "board": {
+            "edit_mode": "Modifica Dashboard",
+            "cancel": "Annulla",
+            "save": "Fine"
+        },
+        "tiles": {
+            "climate": {
+                "target": "Obiettivo",
+                "state": "Stato",
+                "humidity": "Umid."
+            },
+            "media": {
+                "now_playing": "In riproduzione",
+                "artist": "Artista sconosciuto"
+            },
+            "scene": {
+                "activate": "Attiva"
+            },
+            "energy": {
+                "grid": "Rete",
+                "solar": "Solare",
+                "battery": "Batteria",
+                "home": "Casa",
+                "exporting": "Esporta",
+                "importing": "Importa"
+            }
+        }
+    }
+}

@@ -10,7 +10,7 @@
     flex-direction: column;
     justify-content: flex-start;
     box-shadow: var(--tile-shadow);
-    transition: var(--theme-transition), transform 0.2s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     position: relative;
     color: var(--text-primary);
     touch-action: manipulation;
@@ -19,6 +19,8 @@
     /* Isolate repaints to individual tiles for GPU perf */
     contain: layout style;
     container-type: inline-size;
+    transform: translateZ(0);
+    /* Force Hardware Acceleration to stop layer flickering */
 }
 
 .bento-tile.no-padding {

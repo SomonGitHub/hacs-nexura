@@ -146,6 +146,12 @@ body.theme-light .btn-dashboard-edit {
   border: 1px solid rgba(22, 78, 99, 0.1);
 }
 
+body.theme-nature .btn-dashboard-edit {
+  background: rgba(5, 150, 105, 0.08);
+  color: var(--accent-color);
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
 .btn-dashboard-edit:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
@@ -155,6 +161,11 @@ body.theme-light .btn-dashboard-edit {
 body.theme-light .btn-dashboard-edit:hover {
   background: rgba(22, 78, 99, 0.1);
   box-shadow: 0 4px 12px rgba(8, 145, 178, 0.1);
+}
+
+body.theme-nature .btn-dashboard-edit:hover {
+  background: rgba(5, 150, 105, 0.15);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.1);
 }
 
 .btn-primary {
@@ -170,6 +181,12 @@ body.theme-light .btn-primary {
   border: 1px solid rgba(8, 145, 178, 0.2);
 }
 
+body.theme-nature .btn-primary {
+  background: rgba(5, 150, 105, 0.08);
+  color: var(--accent-color);
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
 .btn-primary:hover {
   background: rgba(0, 255, 136, 0.2);
   transform: translateY(-2px);
@@ -180,6 +197,11 @@ body.theme-light .btn-primary {
 body.theme-light .btn-primary:hover {
   background: rgba(8, 145, 178, 0.15);
   box-shadow: 0 4px 15px rgba(8, 145, 178, 0.15);
+}
+
+body.theme-nature .btn-primary:hover {
+  background: rgba(5, 150, 105, 0.15);
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
 }
 
 .btn-secondary {

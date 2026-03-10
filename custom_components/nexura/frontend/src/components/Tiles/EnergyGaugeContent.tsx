@@ -11,6 +11,7 @@
  * @param label — Label below the value (default "Consommation")
  */
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import './EnergyGaugeContent.css';
 
 interface EnergyGaugeContentProps {
@@ -64,8 +65,10 @@ export const EnergyGaugeContent: React.FC<EnergyGaugeContentProps> = ({
     value,
     maxValue = 9000,
     unit = 'W',
-    label = 'Consommation',
+    label,
 }) => {
+    const { t } = useTranslation();
+    const displayLabel = label || t('default_tiles.consumption');
     // Arc geometry constants
     const cx = 80;
     const cy = 80;
@@ -120,7 +123,7 @@ export const EnergyGaugeContent: React.FC<EnergyGaugeContentProps> = ({
                 <span className="gauge-value">{formatted.value}</span>
                 <span className="gauge-unit">{formatted.unit}</span>
             </div>
-            {label && <span className="gauge-label">{label}</span>}
+            {displayLabel && <span className="gauge-label">{displayLabel}</span>}
         </div>
     );
 };

@@ -18,19 +18,19 @@ export const SensorContent: React.FC<SensorContentProps> = ({ value, unit, label
 
         const container = containerRef.current;
         const textElement = textRef.current;
+        let animationFrameId: number;
 
         const updateFontSize = () => {
             const containerWidth = container.clientWidth;
             if (containerWidth <= 0) return;
 
-            // Reset font size to a known value to measure accurately
-            // Alternatively, use the current width and current font size to find the ratio
-            const currentWidth = textElement.scrollWidth;
+            // Use getBoundingClientRect for sub-pixel accuracy
+            const currentWidth = textElement.getBoundingClientRect().width;
             const currentFontSize = parseFloat(window.getComputedStyle(textElement).fontSize);
 
-            if (currentWidth > 0) {
-                // target 92% of container width to give a safety margin and avoid overflows
-                const targetWidth = containerWidth * 0.92;
+            if (currentWidth > 0 && currentFontSize > 0) {
+                // target 90% of container width to give a safety margin
+                const targetWidth = containerWidth * 0.90;
                 let newSize = (targetWidth / currentWidth) * currentFontSize;
 
                 // Constraints
@@ -38,18 +38,29 @@ export const SensorContent: React.FC<SensorContentProps> = ({ value, unit, label
                 const minSize = 12;
                 newSize = Math.min(Math.max(newSize, minSize), maxSize);
 
-                setFontSize(newSize);
+                // Only update if difference is significant (prevents infinite micro-adjustments loops)
+                if (Math.abs(fontSize - newSize) > 0.5) {
+                    setFontSize(newSize);
+                }
             }
         };
 
-        const observer = new ResizeObserver(updateFontSize);
+        const observer = new ResizeObserver(() => {
+            // Buffer the update to the next animation frame to prevent layout thrashing
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animationFrameId = requestAnimationFrame(updateFontSize);
+        });
+
         observer.observe(container);
 
         // Initial call
         updateFontSize();
 
-        return () => observer.disconnect();
-    }, [value, unit]);
+        return () => {
+            observer.disconnect();
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        };
+    }, [value, unit, fontSize]); // Dependencies includes fontSize for the threshold check
 
     return (
         <div className={`sensor-content variant-${variant}`}>

@@ -10,8 +10,9 @@ CONF_SCREENSAVER = "screensaver_enabled"
 THEME_AUTO = "auto"
 THEME_DARK = "dark"
 THEME_LIGHT = "light"
+THEME_NATURE = "nature"
 
-THEMES = [THEME_AUTO, THEME_DARK, THEME_LIGHT]
+THEMES = [THEME_AUTO, THEME_DARK, THEME_LIGHT, THEME_NATURE]
 
 # Adaptive Ambiance settings
 CONF_DAY_NIGHT_CYCLE = "day_night_cycle"

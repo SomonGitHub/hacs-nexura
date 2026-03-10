@@ -1,0 +1,145 @@
+{
+    "translation": {
+        "welcome": "Bienvenido al panel de Nexura",
+        "dashboard": "Panel de control",
+        "rooms": "Habitaciones",
+        "settings": "Ajustes",
+        "favorites": "Favoritos",
+        "unknown_room": "Desconocido",
+        "default_tiles": {
+            "living_room": "Salón",
+            "weather": "Tiempo",
+            "security": "Seguridad",
+            "consumption": "Consumo",
+            "kitchen": "Cocina",
+            "kitchen_light": "Luz de la cocina",
+            "outdoor": "Exterior",
+            "global": "Global"
+        },
+        "states": {
+            "on": "Encendido",
+            "off": "Apagado",
+            "armed": "Armado",
+            "disarmed": "Desarmado",
+            "open": "Abierto",
+            "closed": "Cerrado",
+            "playing": "Reproduciendo",
+            "paused": "Pausado",
+            "idle": "Inactivo",
+            "unavailable": "No disponible"
+        },
+        "settings_modal": {
+            "title": "Ajustes del panel",
+            "general": "General",
+            "appearance": "Apariencia",
+            "language": "Idioma",
+            "theme": "Tema",
+            "theme_auto": "Sistema (Auto)",
+            "theme_dark": "Oscuro",
+            "theme_light": "Claro",
+            "theme_nature": "Naturaleza",
+            "screensaver": "Salvapantallas",
+            "screensaver_desc": "Se activa tras 2 minutos de inactividad",
+            "day_night_cycle": "Ciclo Día/Noche Automático",
+            "day_night_cycle_desc": "El color de acento se adapta a la hora del día (Solo en tema oscuro)",
+            "weather_effects": "Efectos Meteorológicos",
+            "weather_effects_desc": "Muestra animaciones (lluvia, nieve) según el clima",
+            "weather_effects_options": {
+                "none": "Desactivados",
+                "subtle": "Sutiles",
+                "all": "Completos"
+            },
+            "tile_themes": "Temas de Paneles",
+            "tile_themes_desc": "Permitir personalización visual individual por panel",
+            "language_fr": "Francés (Français)",
+            "language_en": "Inglés (English)",
+            "save": "Guardar",
+            "cancel": "Cerrar"
+        },
+        "add_tile_modal": {
+            "add_title": "Añadir panel",
+            "edit_title": "Editar panel",
+            "preview": "Vista previa",
+            "form": {
+                "title": "Título",
+                "title_placeholder": "Ej., Luz del salón",
+                "room": "Habitación",
+                "room_placeholder": "Ej., Salón",
+                "type": "Tipo de panel",
+                "types": {
+                    "toggle": "Botón de alternancia",
+                    "slider": "Control deslizante",
+                    "info": "Información (Sensor)",
+                    "graph": "Gráfico",
+                    "cover": "Persianas",
+                    "media": "Reproductor multimedia",
+                    "energy-gauge": "Medidor de energía",
+                    "energy-flow": "Flujo de energía",
+                    "scene": "Escena",
+                    "spacer": "Espaciador"
+                },
+                "size": "Tamaño",
+                "sizes": {
+                    "mini": "Mini (2x1)",
+                    "small": "Pequeño (2x2)",
+                    "rect": "Rectángulo (4x2)",
+                    "square": "Cuadrado (4x4)",
+                    "large-rect": "Rectángulo grande (8x4)",
+                    "large-square": "Cuadrado grande (8x8)"
+                },
+                "entity": "Entidad (Home Assistant)",
+                "entity_placeholder": "Buscar entidad...",
+                "icon_color": "Color del icono",
+                "icon": "Icono",
+                "icon_placeholder": "Ej., Lightbulb",
+                "icon_help": "Usa un nombre de Tabler icon (ej. Lightbulb, Droplet, Sun, Moon). Déjalo vacío para automático.",
+                "theme": "Tema visual (Preset)",
+                "themes": {
+                    "glass": "Cristal",
+                    "solid": "Sólido",
+                    "gradient": "Degradado",
+                    "minimal": "Minimalista",
+                    "neon": "Neón",
+                    "frosted": "Esmerilado"
+                },
+                "energy": {
+                    "max_power": "Potencia Máx. (W)",
+                    "grid_entity": "Entidad de Red",
+                    "solar_entity": "Entidad Solar",
+                    "battery_entity": "Entidad de Batería (W)",
+                    "battery_level_entity": "Nivel de Batería (%)"
+                }
+            },
+            "cancel": "Cancelar",
+            "save": "Guardar",
+            "add": "Añadir"
+        },
+        "board": {
+            "edit_mode": "Editar panel",
+            "cancel": "Cancelar",
+            "save": "Terminar"
+        },
+        "tiles": {
+            "climate": {
+                "target": "Objetivo",
+                "state": "Estado",
+                "humidity": "Hum."
+            },
+            "media": {
+                "now_playing": "Reproduciendo ahora",
+                "artist": "Artista desconocido"
+            },
+            "scene": {
+                "activate": "Activar"
+            },
+            "energy": {
+                "grid": "Red",
+                "solar": "Solar",
+                "battery": "Batería",
+                "home": "Hogar",
+                "exporting": "Exportación",
+                "importing": "Importación"
+            }
+        }
+    }
+}

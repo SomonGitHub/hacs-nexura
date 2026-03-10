@@ -22,13 +22,18 @@
         "step": {
             "init": {
                 "title": "Nexura Options",
-                "description": "Configure Nexura settings.",
+                "description": "Configure Nexura dashboard settings.",
                 "data": {
                     "theme": "Preferred Theme",
                     "screensaver_enabled": "Enable Screensaver",
                     "day_night_cycle": "Day/Night Color Cycle",
                     "weather_effects": "Weather Visual Effects",
                     "tile_themes_enabled": "Enable Tile Themes"
+                },
+                "data_description": {
+                    "theme": "Choose 'auto' to follow system settings",
+                    "day_night_cycle": "(Active only for 'Dark' theme)",
+                    "tile_themes_enabled": "Allows custom styles (Glass, Neon, Gradient...) per tile"
                 }
             }
         }

@@ -1,0 +1,41 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Nexura-Konfiguration",
+                "description": "Bitte geben Sie die Konfigurationsdaten ein.",
+                "data": {
+                    "host": "IP-Adresse / Host"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Verbindung fehlgeschlagen",
+            "invalid_auth": "Ungültige Authentifizierung",
+            "unknown": "Unerwarteter Fehler"
+        },
+        "abort": {
+            "already_configured": "Das Gerät ist bereits konfiguriert"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Nexura-Optionen",
+                "description": "Konfigurieren Sie die Nexura-Dashboard-Einstellungen.",
+                "data": {
+                    "theme": "Bevorzugtes Design",
+                    "screensaver_enabled": "Bildschirmschoner aktivieren",
+                    "day_night_cycle": "Tag/Nacht-Farbzyklus",
+                    "weather_effects": "Visuelle Wettereffekte",
+                    "tile_themes_enabled": "Kacheldesigns aktivieren"
+                },
+                "data_description": {
+                    "theme": "Wählen Sie 'auto', um den Systemeinstellungen zu folgen",
+                    "day_night_cycle": "(Nur beim 'Dunkel'-Design aktiv)",
+                    "tile_themes_enabled": "Erlaubt individuelle Stile (Glas, Neon, Farbverlauf...) pro Kachel"
+                }
+            }
+        }
+    }
+}

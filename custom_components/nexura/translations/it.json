@@ -1,0 +1,41 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Configurazione Nexura",
+                "description": "Inserisci i dettagli di configurazione.",
+                "data": {
+                    "host": "Indirizzo IP / Host"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Connessione non riuscita",
+            "invalid_auth": "Autenticazione non valida",
+            "unknown": "Errore imprevisto"
+        },
+        "abort": {
+            "already_configured": "Il dispositivo è già configurato"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Opzioni Nexura",
+                "description": "Configura le impostazioni della dashboard di Nexura.",
+                "data": {
+                    "theme": "Tema preferito",
+                    "screensaver_enabled": "Abilita Salvaschermo",
+                    "day_night_cycle": "Ciclo colori Giorno/Notte",
+                    "weather_effects": "Effetti Visivi Meteo",
+                    "tile_themes_enabled": "Abilita Temi Riquadri"
+                },
+                "data_description": {
+                    "theme": "Scegli 'auto' per seguire le impostazioni di sistema",
+                    "day_night_cycle": "(Attivo solo per il tema 'Scuro')",
+                    "tile_themes_enabled": "Consente stili personalizzati (Vetro, Neon, Gradiente...) per riquadro"
+                }
+            }
+        }
+    }
+}

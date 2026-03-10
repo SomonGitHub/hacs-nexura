@@ -2,6 +2,7 @@ import React from 'react';
 import type { HassEntities } from 'home-assistant-js-websocket';
 import type { TileData, TileType, TileTheme } from '../../App';
 import type { TileSize } from '../BentoTile/BentoTile';
+import { useTranslation } from 'react-i18next';
 import './AddTileModal.css';
 
 interface AddTileModalProps {
@@ -14,6 +15,7 @@ interface AddTileModalProps {
 }
 
 export const AddTileModal: React.FC<AddTileModalProps> = ({ isOpen, onClose, onAdd, hassEntities, defaultRoom, tileToEdit }) => {
+    const { t } = useTranslation();
     const [title, setTitle] = React.useState('');
     const [type, setType] = React.useState<TileType>('info');
     const [size, setSize] = React.useState<TileSize>('small');
@@ -131,16 +133,16 @@ export const AddTileModal: React.FC<AddTileModalProps> = ({ isOpen, onClose, onA
     return (
         <div className="modal-overlay">
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <h2>{tileToEdit ? 'Modifier la Tuile' : 'Ajouter une Tuile'}</h2>
+                <h2>{tileToEdit ? t('add_tile_modal.edit_title') : t('add_tile_modal.add_title')}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group entity-scanner-group">
-                        <label>ID de l'entité Home Assistant (optionnel)</label>
+                        <label>{t('add_tile_modal.form.entity')} (optionnel)</label>
                         <div className="input-with-action">
                             <input
                                 type="text"
                                 value={entityId}
                                 onChange={(e) => setEntityId(e.target.value)}
-                                placeholder="Ex: light.salon"
+                                placeholder={t('add_tile_modal.form.entity_placeholder')}
                             />
                             <button
                                 type="button"
@@ -157,7 +159,7 @@ export const AddTileModal: React.FC<AddTileModalProps> = ({ isOpen, onClose, onA
                                 <input
                                     type="text"
                                     className="scanner-search"
-                                    placeholder="Rechercher une entité..."
+                                    placeholder={t('add_tile_modal.form.entity_placeholder')}
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                     autoFocus
@@ -180,58 +182,58 @@ export const AddTileModal: React.FC<AddTileModalProps> = ({ isOpen, onClose, onA
                     </div>
 
                     <div className="form-group">
-                        <label>Titre de la tuile</label>
+                        <label>{t('add_tile_modal.form.title')}</label>
                         <input
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            placeholder="Ex: Lumière Salon"
+                            placeholder={t('add_tile_modal.form.title_placeholder')}
                             required
                         />
                     </div>
 
                     <div className="form-group">
-                        <label>Pièce (optionnel)</label>
+                        <label>{t('add_tile_modal.form.room')} (optionnel)</label>
                         <input
                             type="text"
                             value={room}
                             onChange={(e) => setRoom(e.target.value)}
-                            placeholder="Ex: Salon, Cuisine..."
+                            placeholder={t('add_tile_modal.form.room_placeholder')}
                         />
                     </div>
 
                     <div className="form-group">
-                        <label>Type de composant</label>
+                        <label>{t('add_tile_modal.form.type')}</label>
                         <select value={type} onChange={(e) => setType(e.target.value as TileType)}>
-                            <option value="info">Texte simple (Info)</option>
-                            <option value="toggle">Interrupteur (Toggle)</option>
-                            <option value="slider">Curseur (Slider)</option>
-                            <option value="graph">Graphique Miniature (Graph)</option>
-                            <option value="cover">Volet (Cover)</option>
-                            <option value="media">Lecteur Média (Media)</option>
-                            <option value="energy-gauge">Jauge Énergie (Gauge)</option>
-                            <option value="energy-flow">Flux Énergie (Flow)</option>
-                            <option value="scene">Scène (Magic Button)</option>
-                            <option value="spacer">Espace (Spacer)</option>
+                            <option value="info">{t('add_tile_modal.form.types.info')}</option>
+                            <option value="toggle">{t('add_tile_modal.form.types.toggle')}</option>
+                            <option value="slider">{t('add_tile_modal.form.types.slider')}</option>
+                            <option value="graph">{t('add_tile_modal.form.types.graph')}</option>
+                            <option value="cover">{t('add_tile_modal.form.types.cover')}</option>
+                            <option value="media">{t('add_tile_modal.form.types.media')}</option>
+                            <option value="energy-gauge">{t('add_tile_modal.form.types.energy-gauge')}</option>
+                            <option value="energy-flow">{t('add_tile_modal.form.types.energy-flow')}</option>
+                            <option value="scene">{t('add_tile_modal.form.types.scene')}</option>
+                            <option value="spacer">{t('add_tile_modal.form.types.spacer')}</option>
                         </select>
                     </div>
 
                     <div className="form-group">
-                        <label>Thème visuel (Optionnel)</label>
+                        <label>{t('add_tile_modal.form.theme')} (Optionnel)</label>
                         <select value={tileTheme} onChange={(e) => setTileTheme(e.target.value as TileTheme | '')}>
-                            <option value="">Par défaut (Glass)</option>
-                            <option value="solid">Couleur Pleine (Solid)</option>
-                            <option value="gradient">Dégradé (Gradient)</option>
-                            <option value="minimal">Minimaliste (Minimal)</option>
-                            <option value="neon">Néon lumineux (Neon)</option>
-                            <option value="frosted">Verre givré (Frosted)</option>
+                            <option value="">Par défaut ({t('add_tile_modal.form.themes.glass')})</option>
+                            <option value="solid">{t('add_tile_modal.form.themes.solid')}</option>
+                            <option value="gradient">{t('add_tile_modal.form.themes.gradient')}</option>
+                            <option value="minimal">{t('add_tile_modal.form.themes.minimal')}</option>
+                            <option value="neon">{t('add_tile_modal.form.themes.neon')}</option>
+                            <option value="frosted">{t('add_tile_modal.form.themes.frosted')}</option>
                         </select>
                     </div>
 
                     <div className="modal-actions">
-                        <button type="button" className="btn-secondary" onClick={onClose}>Annuler</button>
+                        <button type="button" className="btn-secondary" onClick={onClose}>{t('add_tile_modal.cancel')}</button>
                         <div className="modal-actions-right">
-                            <button type="submit" className="btn-primary">{tileToEdit ? 'Enregistrer' : 'Ajouter'}</button>
+                            <button type="submit" className="btn-primary">{tileToEdit ? t('add_tile_modal.save') : t('add_tile_modal.add')}</button>
                             <a href="https://www.buymeacoffee.com/simonv" target="_blank" rel="noreferrer" className="bmc-button">
                                 <img
                                     src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"

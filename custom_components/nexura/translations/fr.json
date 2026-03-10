@@ -1,0 +1,41 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Configuration Nexura",
+                "description": "Veuillez entrer les détails de configuration.",
+                "data": {
+                    "host": "Adresse IP / Hôte"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Échec de la connexion",
+            "invalid_auth": "Authentification invalide",
+            "unknown": "Erreur inattendue"
+        },
+        "abort": {
+            "already_configured": "L'appareil est déjà configuré"
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Options Nexura",
+                "description": "Configurez les paramètres du tableau de bord Nexura.",
+                "data": {
+                    "theme": "Thème préféré",
+                    "screensaver_enabled": "Activer l'économiseur d'écran",
+                    "day_night_cycle": "Cycle de couleur Jour/Nuit",
+                    "weather_effects": "Effets Météo Visuels",
+                    "tile_themes_enabled": "Activer les thèmes de tuiles"
+                },
+                "data_description": {
+                    "theme": "Choisissez 'auto' pour suivre le système",
+                    "day_night_cycle": "(Actif uniquement pour le thème 'Sombre' / 'Dark')",
+                    "tile_themes_enabled": "Permet d'avoir des styles personnalisés (Verre, Néon, Dégradé...) par tuile"
+                }
+            }
+        }
+    }
+}

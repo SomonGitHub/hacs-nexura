@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { DynamicIcon } from '../DynamicIcon/DynamicIcon';
 import { getRoomIcon } from '../../utils/entityMapping';
+import { useTranslation } from 'react-i18next';
 import './Sidebar.css';
 
 interface SidebarProps {
@@ -111,12 +112,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
     isFullScreen = false,
     onToggleFullScreen,
 }) => {
+    const { t } = useTranslation();
 
     return (
         <aside className="sidebar-nav">
             <div className="sidebar-section">
                 <NavItem
-                    label="Favoris"
+                    label={t('favorites')}
                     icon="Star"
                     isActive={activeView === 'favorites'}
                     onClick={() => onViewChange('favorites')}
@@ -126,7 +128,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <div className="sidebar-divider" />
 
             <div className="sidebar-section rooms-section">
-                <h4 className="sidebar-subtitle">Pièces</h4>
+                <h4 className="sidebar-subtitle">{t('rooms')}</h4>
                 <div className="rooms-list">
                     {rooms.map(room => (
                         <NavItem
@@ -143,7 +145,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             {isEditMode && (
                 <div className="sidebar-edit-badge">
-                    Mode Édition
+                    {t('board.edit_mode')}
                 </div>
             )}
 

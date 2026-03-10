@@ -182,8 +182,9 @@ const BentoTileInner: React.FC<BentoTileProps> = ({
     const sizeClass = `tile-${size}`;
 
     // Disable layout animations during drag to reduce GPU overhead on tablets.
-    // Also disable hover/tap scale when any tile is being dragged.
-    const enableLayoutAnim = !isDragging && !isOverlay && !isAnyDragging;
+    // Disable it completely unless in edit mode to prevent text content updates 
+    // from triggering expensive layout recalculations.
+    const enableLayoutAnim = isEditMode && !isDragging && !isOverlay && !isAnyDragging;
 
     // Build theme CSS class
     const themeClass = tileTheme && tileTheme !== 'glass' ? `theme-${tileTheme}` : '';

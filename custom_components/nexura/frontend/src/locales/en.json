@@ -1,0 +1,145 @@
+{
+    "translation": {
+        "welcome": "Welcome to Nexura Dashboard",
+        "dashboard": "Dashboard",
+        "rooms": "Rooms",
+        "settings": "Settings",
+        "favorites": "Favorites",
+        "unknown_room": "Unknown",
+        "default_tiles": {
+            "living_room": "Living Room",
+            "weather": "Weather",
+            "security": "Security",
+            "consumption": "Consumption",
+            "kitchen": "Kitchen",
+            "kitchen_light": "Kitchen Light",
+            "outdoor": "Outdoor",
+            "global": "Global"
+        },
+        "states": {
+            "on": "On",
+            "off": "Off",
+            "armed": "Armed",
+            "disarmed": "Disarmed",
+            "open": "Open",
+            "closed": "Closed",
+            "playing": "Playing",
+            "paused": "Paused",
+            "idle": "Idle",
+            "unavailable": "Unavailable"
+        },
+        "settings_modal": {
+            "title": "Dashboard Settings",
+            "general": "General",
+            "appearance": "Appearance",
+            "language": "Language",
+            "theme": "Theme",
+            "theme_auto": "System (Auto)",
+            "theme_dark": "Dark",
+            "theme_light": "Light",
+            "theme_nature": "Nature",
+            "screensaver": "Screensaver",
+            "screensaver_desc": "Activates after 2 minutes of inactivity",
+            "day_night_cycle": "Automatic Day/Night Cycle",
+            "day_night_cycle_desc": "Accent color adapts to the time of day (Dark theme only)",
+            "weather_effects": "Weather Effects",
+            "weather_effects_desc": "Displays animations (rain, snow) based on the weather",
+            "weather_effects_options": {
+                "none": "Disabled",
+                "subtle": "Subtle",
+                "all": "Full"
+            },
+            "tile_themes": "Tile Themes",
+            "tile_themes_desc": "Allow individual visual customization of tiles",
+            "language_fr": "French (Français)",
+            "language_en": "English",
+            "save": "Save",
+            "cancel": "Close"
+        },
+        "add_tile_modal": {
+            "add_title": "Add Tile",
+            "edit_title": "Edit Tile",
+            "preview": "Tile Preview",
+            "form": {
+                "title": "Title",
+                "title_placeholder": "e.g., Living Room Light",
+                "room": "Room",
+                "room_placeholder": "e.g., Living Room",
+                "type": "Tile Type",
+                "types": {
+                    "toggle": "Toggle Button",
+                    "slider": "Slider",
+                    "info": "Information (Sensor)",
+                    "graph": "Graph",
+                    "cover": "Cover / Blinds",
+                    "media": "Media Player",
+                    "energy-gauge": "Energy Gauge",
+                    "energy-flow": "Energy Flow",
+                    "scene": "Scene",
+                    "spacer": "Spacer"
+                },
+                "size": "Size",
+                "sizes": {
+                    "mini": "Mini (2x1)",
+                    "small": "Small (2x2)",
+                    "rect": "Rectangle (4x2)",
+                    "square": "Square (4x4)",
+                    "large-rect": "Large Rectangle (8x4)",
+                    "large-square": "Large Square (8x8)"
+                },
+                "entity": "Entity (Home Assistant)",
+                "entity_placeholder": "Search for an entity...",
+                "icon_color": "Icon Color",
+                "icon": "Icon",
+                "icon_placeholder": "e.g., Lightbulb",
+                "icon_help": "Use a Tabler icon name (e.g., Lightbulb, Droplet, Sun, Moon). Leave empty for auto.",
+                "theme": "Visual Theme (Preset)",
+                "themes": {
+                    "glass": "Glass",
+                    "solid": "Solid",
+                    "gradient": "Gradient",
+                    "minimal": "Minimalist",
+                    "neon": "Neon",
+                    "frosted": "Frosted"
+                },
+                "energy": {
+                    "max_power": "Max Power (W)",
+                    "grid_entity": "Grid Entity",
+                    "solar_entity": "Solar Entity",
+                    "battery_entity": "Battery Entity (W)",
+                    "battery_level_entity": "Battery Level Entity (%)"
+                }
+            },
+            "cancel": "Cancel",
+            "save": "Save",
+            "add": "Add"
+        },
+        "board": {
+            "edit_mode": "Edit Mode",
+            "cancel": "Cancel",
+            "save": "Finish"
+        },
+        "tiles": {
+            "climate": {
+                "target": "Target",
+                "state": "State",
+                "humidity": "Hum."
+            },
+            "media": {
+                "now_playing": "Now Playing",
+                "artist": "Unknown Artist"
+            },
+            "scene": {
+                "activate": "Activate"
+            },
+            "energy": {
+                "grid": "Grid",
+                "solar": "Solar",
+                "battery": "Battery",
+                "home": "Home",
+                "exporting": "Export",
+                "importing": "Import"
+            }
+        }
+    }
+}

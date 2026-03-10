@@ -1,0 +1,145 @@
+{
+    "translation": {
+        "welcome": "Bienvenue sur le tableau de bord Nexura",
+        "dashboard": "Tableau de bord",
+        "rooms": "Pièces",
+        "settings": "Paramètres",
+        "favorites": "Favoris",
+        "unknown_room": "Inconnue",
+        "default_tiles": {
+            "living_room": "Salon",
+            "weather": "Météo",
+            "security": "Sécurité",
+            "consumption": "Consommation",
+            "kitchen": "Cuisine",
+            "kitchen_light": "Lumière Cuisine",
+            "outdoor": "Extérieur",
+            "global": "Global"
+        },
+        "states": {
+            "on": "Allumé",
+            "off": "Éteint",
+            "armed": "Armé",
+            "disarmed": "Désarmé",
+            "open": "Ouvert",
+            "closed": "Fermé",
+            "playing": "Lecture",
+            "paused": "En pause",
+            "idle": "Inactif",
+            "unavailable": "Indisponible"
+        },
+        "settings_modal": {
+            "title": "Paramètres du tableau de bord",
+            "general": "Général",
+            "appearance": "Apparence",
+            "language": "Langue",
+            "theme": "Thème",
+            "theme_auto": "Système (Auto)",
+            "theme_dark": "Sombre",
+            "theme_light": "Clair",
+            "theme_nature": "Nature",
+            "screensaver": "Économiseur d'écran",
+            "screensaver_desc": "S'active après 2 minutes d'inactivité",
+            "day_night_cycle": "Cycle Jour/Nuit Automatique",
+            "day_night_cycle_desc": "La couleur d'accent s'adapte à l'heure de la journée (Thème sombre uniquement)",
+            "weather_effects": "Effets Météo",
+            "weather_effects_desc": "Affiche des animations (pluie, neige) selon la météo",
+            "weather_effects_options": {
+                "none": "Désactivé",
+                "subtle": "Subtil",
+                "all": "Complet"
+            },
+            "tile_themes": "Thèmes de Tuiles",
+            "tile_themes_desc": "Autoriser la personnalisation visuelle individuelle des tuiles",
+            "language_fr": "Français",
+            "language_en": "Anglais (English)",
+            "save": "Enregistrer",
+            "cancel": "Fermer"
+        },
+        "add_tile_modal": {
+            "add_title": "Ajouter une tuile",
+            "edit_title": "Modifier la tuile",
+            "preview": "Aperçu de la tuile",
+            "form": {
+                "title": "Titre",
+                "title_placeholder": "Ex: Lumière Salon",
+                "room": "Pièce",
+                "room_placeholder": "Ex: Salon",
+                "type": "Type de tuile",
+                "types": {
+                    "toggle": "Bouton poussoir (Toggle)",
+                    "slider": "Curseur (Slider)",
+                    "info": "Information (Capteur)",
+                    "graph": "Graphique",
+                    "cover": "Volet Roulant",
+                    "media": "Média",
+                    "energy-gauge": "Jauge d'Énergie",
+                    "energy-flow": "Flux d'Énergie",
+                    "scene": "Scène",
+                    "spacer": "Espaceur"
+                },
+                "size": "Taille",
+                "sizes": {
+                    "mini": "Mini (2x1)",
+                    "small": "Petit (2x2)",
+                    "rect": "Rectangle (4x2)",
+                    "square": "Carré (4x4)",
+                    "large-rect": "Grand Rectangle (8x4)",
+                    "large-square": "Grand Carré (8x8)"
+                },
+                "entity": "Entité (Home Assistant)",
+                "entity_placeholder": "Rechercher une entité...",
+                "icon_color": "Couleur de l'icône",
+                "icon": "Icône",
+                "icon_placeholder": "Ex: Lightbulb",
+                "icon_help": "Utilisez le nom d'une icône Tabler (ex: Lightbulb, Droplet, Sun, Moon). Laissez vide pour auto.",
+                "theme": "Thème Visuel (Preset)",
+                "themes": {
+                    "glass": "Verre (Glass)",
+                    "solid": "Solide",
+                    "gradient": "Dégradé",
+                    "minimal": "Minimaliste",
+                    "neon": "Néon",
+                    "frosted": "Givré"
+                },
+                "energy": {
+                    "max_power": "Puissance Max (W)",
+                    "grid_entity": "Entité Réseau",
+                    "solar_entity": "Entité Solaire",
+                    "battery_entity": "Entité Batterie (W)",
+                    "battery_level_entity": "Entité Niveau Batterie (%)"
+                }
+            },
+            "cancel": "Annuler",
+            "save": "Enregistrer",
+            "add": "Ajouter"
+        },
+        "board": {
+            "edit_mode": "Mode Édition",
+            "cancel": "Annuler",
+            "save": "Terminer"
+        },
+        "tiles": {
+            "climate": {
+                "target": "Cible",
+                "state": "État",
+                "humidity": "Hum."
+            },
+            "media": {
+                "now_playing": "En lecture",
+                "artist": "Artiste inconnu"
+            },
+            "scene": {
+                "activate": "Activer"
+            },
+            "energy": {
+                "grid": "Réseau",
+                "solar": "Solaire",
+                "battery": "Batterie",
+                "home": "Maison",
+                "exporting": "Export",
+                "importing": "Import"
+            }
+        }
+    }
+}

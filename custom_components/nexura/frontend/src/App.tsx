@@ -114,12 +114,12 @@ const mockGraphData = [
 ];
 
 const INITIAL_TILES: TileData[] = [
-  { id: 'salon', size: 'rect', type: 'toggle', title: 'Salon', entityId: 'light.salon', room: 'Salon', icon: 'Lightbulb', color: '#00ff88', isFavorite: true },
-  { id: 'meteo', size: 'small', type: 'info', title: 'Météo', content: '18°C ☀️', room: 'Extérieur', icon: 'Sun', color: '#ffaa00', isFavorite: true },
-  { id: 'security', size: 'small', type: 'info', title: 'Sécurité', content: 'Armé', room: 'Global', icon: 'ShieldCheck', color: '#ff4444', isFavorite: true },
-  { id: 'conso', size: 'square', type: 'graph', title: 'Consommation', content: '450W', room: 'Global', graphData: mockGraphData, icon: 'Activity', color: '#ff00ff' },
-  { id: 'cuisine', size: 'rect', type: 'toggle', title: 'Cuisine', entityId: 'light.cuisine', room: 'Cuisine', icon: 'Power', color: '#0088ff', isFavorite: true },
-  { id: 'cuisine_light', size: 'rect', type: 'slider', title: 'Lumière Cuisine', entityId: 'light.cuisine', room: 'Cuisine', icon: 'Settings', color: '#ffffff' },
+  { id: 'salon', size: 'rect', type: 'toggle', title: 'default_tiles.living_room', entityId: 'light.salon', room: 'default_tiles.living_room', icon: 'Lightbulb', color: '#00ff88', isFavorite: true },
+  { id: 'meteo', size: 'small', type: 'info', title: 'default_tiles.weather', content: '18°C ☀️', room: 'default_tiles.outdoor', icon: 'Sun', color: '#ffaa00', isFavorite: true },
+  { id: 'security', size: 'small', type: 'info', title: 'default_tiles.security', content: 'states.armed', room: 'default_tiles.global', icon: 'ShieldCheck', color: '#ff4444', isFavorite: true },
+  { id: 'conso', size: 'square', type: 'graph', title: 'default_tiles.consumption', content: '450W', room: 'default_tiles.global', graphData: mockGraphData, icon: 'Activity', color: '#ff00ff' },
+  { id: 'cuisine', size: 'rect', type: 'toggle', title: 'default_tiles.kitchen', entityId: 'light.cuisine', room: 'default_tiles.kitchen', icon: 'Power', color: '#0088ff', isFavorite: true },
+  { id: 'cuisine_light', size: 'rect', type: 'slider', title: 'default_tiles.kitchen_light', entityId: 'light.cuisine', room: 'default_tiles.kitchen', icon: 'Settings', color: '#ffffff' },
 ];
 
 const collidesWith = (a: LayoutEntry, b: LayoutEntry): boolean => {
@@ -250,7 +250,7 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [theme, setTheme] = useState<'auto' | 'dark' | 'light'>('auto');
+  const [theme, setTheme] = useState<'auto' | 'dark' | 'light' | 'nature'>('auto');
   const [screensaverEnabled, setScreensaverEnabled] = useState(true);
 
   const [isEditMode, setIsEditMode] = useState(false);
@@ -437,7 +437,7 @@ function App() {
         // Load Config
         try {
           const configRes = await callHAWebSocket('nexura/config/get') as {
-            theme: 'auto' | 'dark' | 'light',
+            theme: 'auto' | 'dark' | 'light' | 'nature',
             screensaver_enabled?: boolean,
             day_night_cycle?: boolean,
             weather_effects?: WeatherEffectsMode,
@@ -470,7 +470,7 @@ function App() {
 
   useEffect(() => {
     // Apply theme to body
-    document.body.classList.remove('theme-dark', 'theme-light', 'theme-auto');
+    document.body.classList.remove('theme-dark', 'theme-light', 'theme-auto', 'theme-nature');
     document.body.classList.add(`theme-${theme}`);
   }, [theme]);
 
@@ -943,9 +943,9 @@ function App() {
   // expensive animations on sibling tiles during drag)
   const isAnyDragging = activeId !== null;
 
-  // Apply day/night gradient to body background
+  // Apply day/night gradient to body background (Only for dark theme)
   // (must be called before any conditional returns — rules of hooks)
-  useTimeGradient(dayNightCycle);
+  useTimeGradient(theme === 'dark' ? dayNightCycle : false);
 
   // Find the first weather entity for overlay effects
   const weatherEntityState = useMemo(() => {
@@ -1144,19 +1144,19 @@ function App() {
               <div className="header-actions">
                 {!isEditMode ? (
                   <button className="btn-dashboard-edit" onClick={handleEditClick}>
-                    Modifier le Dashboard
+                    {t('board.edit_mode')}
                   </button>
                 ) : (
                   <div className="edit-controls">
-                    <button className="btn-primary" onClick={() => setIsAddModalOpen(true)}>+ Ajouter</button>
-                    <button className="btn-secondary" onClick={handleCancelEdit}>Annuler</button>
-                    <button className="btn-primary" onClick={handleSaveEdit}>Enregistrer</button>
+                    <button className="btn-primary" onClick={() => setIsAddModalOpen(true)}>+ {t('add_tile_modal.add')}</button>
+                    <button className="btn-secondary" onClick={handleCancelEdit}>{t('board.cancel')}</button>
+                    <button className="btn-primary" onClick={handleSaveEdit}>{t('board.save')}</button>
                   </div>
                 )}
               </div>
             </div>
             <div className={`connection-status ${hassState}`}>
-              {hassState === 'connected' ? '● Live' : (hassState === 'connecting' ? '○ Connexion...' : '✕ Erreur')}
+              {hassState === 'connected' ? `● ${t('states.playing') || 'Live'}` : (hassState === 'connecting' ? '○ Connexion...' : '✕ Erreur')}
             </div>
           </div>
         </header>

@@ -1,0 +1,145 @@
+{
+    "translation": {
+        "welcome": "Willkommen beim Nexura Dashboard",
+        "dashboard": "Dashboard",
+        "rooms": "Räume",
+        "settings": "Einstellungen",
+        "favorites": "Favoriten",
+        "unknown_room": "Unbekannt",
+        "default_tiles": {
+            "living_room": "Wohnzimmer",
+            "weather": "Wetter",
+            "security": "Sicherheit",
+            "consumption": "Verbrauch",
+            "kitchen": "Küche",
+            "kitchen_light": "Küchenlicht",
+            "outdoor": "Draußen",
+            "global": "Global"
+        },
+        "states": {
+            "on": "An",
+            "off": "Aus",
+            "armed": "Scharf",
+            "disarmed": "Unscharf",
+            "open": "Offen",
+            "closed": "Geschlossen",
+            "playing": "Wiedergabe",
+            "paused": "Pausiert",
+            "idle": "Leerlauf",
+            "unavailable": "Nicht verfügbar"
+        },
+        "settings_modal": {
+            "title": "Dashboard-Einstellungen",
+            "general": "Allgemein",
+            "appearance": "Erscheinungsbild",
+            "language": "Sprache",
+            "theme": "Design",
+            "theme_auto": "System (Auto)",
+            "theme_dark": "Dunkel",
+            "theme_light": "Hell",
+            "theme_nature": "Natur",
+            "screensaver": "Bildschirmschoner",
+            "screensaver_desc": "Wird nach 2 Minuten Inaktivität aktiviert",
+            "day_night_cycle": "Automatischer Tag/Nacht-Zyklus",
+            "day_night_cycle_desc": "Die Akzentfarbe passt sich der Tageszeit an (nur im dunklen Design)",
+            "weather_effects": "Wettereffekte",
+            "weather_effects_desc": "Zeigt Animationen (Regen, Schnee) basierend auf dem Wetter an",
+            "weather_effects_options": {
+                "none": "Deaktiviert",
+                "subtle": "Dezent",
+                "all": "Vollständig"
+            },
+            "tile_themes": "Kacheldesigns",
+            "tile_themes_desc": "Individuelle visuelle Anpassung von Kacheln erlauben",
+            "language_fr": "Französisch (Français)",
+            "language_en": "Englisch (English)",
+            "save": "Speichern",
+            "cancel": "Schließen"
+        },
+        "add_tile_modal": {
+            "add_title": "Kachel hinzufügen",
+            "edit_title": "Kachel bearbeiten",
+            "preview": "Kachel-Vorschau",
+            "form": {
+                "title": "Titel",
+                "title_placeholder": "Z. B. Wohnzimmerlicht",
+                "room": "Raum",
+                "room_placeholder": "Z. B. Wohnzimmer",
+                "type": "Kacheltyp",
+                "types": {
+                    "toggle": "Umschaltfläche",
+                    "slider": "Schieberegler",
+                    "info": "Information (Sensor)",
+                    "graph": "Diagramm",
+                    "cover": "Rollladen / Jalousien",
+                    "media": "Medienplayer",
+                    "energy-gauge": "Energieanzeige",
+                    "energy-flow": "Energiefluss",
+                    "scene": "Szene",
+                    "spacer": "Abstandshalter"
+                },
+                "size": "Größe",
+                "sizes": {
+                    "mini": "Mini (2x1)",
+                    "small": "Klein (2x2)",
+                    "rect": "Rechteck (4x2)",
+                    "square": "Quadrat (4x4)",
+                    "large-rect": "Großes Rechteck (8x4)",
+                    "large-square": "Großes Quadrat (8x8)"
+                },
+                "entity": "Entität (Home Assistant)",
+                "entity_placeholder": "Entität suchen...",
+                "icon_color": "Symbolfarbe",
+                "icon": "Symbol",
+                "icon_placeholder": "Z. B. Lightbulb",
+                "icon_help": "Verwenden Sie einen Tabler-Symbolnamen (z. B. Lightbulb, Droplet, Sun, Moon). Leer lassen für Autonennung.",
+                "theme": "Visuelles Design (Voreinstellung)",
+                "themes": {
+                    "glass": "Glas",
+                    "solid": "Einfarbig",
+                    "gradient": "Farbverlauf",
+                    "minimal": "Minimalistisch",
+                    "neon": "Neon",
+                    "frosted": "Matt"
+                },
+                "energy": {
+                    "max_power": "Max. Leistung (W)",
+                    "grid_entity": "Netz-Entität",
+                    "solar_entity": "Solar-Entität",
+                    "battery_entity": "Batterie-Entität (W)",
+                    "battery_level_entity": "Batterie-Ladestand (%)"
+                }
+            },
+            "cancel": "Abbrechen",
+            "save": "Speichern",
+            "add": "Hinzufügen"
+        },
+        "board": {
+            "edit_mode": "Dashboard bearbeiten",
+            "cancel": "Abbrechen",
+            "save": "Fertig"
+        },
+        "tiles": {
+            "climate": {
+                "target": "Ziel",
+                "state": "Status",
+                "humidity": "Feucht."
+            },
+            "media": {
+                "now_playing": "Aktuelle Wiedergabe",
+                "artist": "Unbekannter Künstler"
+            },
+            "scene": {
+                "activate": "Aktivieren"
+            },
+            "energy": {
+                "grid": "Netz",
+                "solar": "Solar",
+                "battery": "Batterie",
+                "home": "Zuhause",
+                "exporting": "Exportieren",
+                "importing": "Importieren"
+            }
+        }
+    }
+}

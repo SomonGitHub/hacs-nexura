@@ -9,7 +9,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Theme Transitions */
-  --theme-transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+  --theme-transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 /* Dark Theme (Default) */
@@ -45,6 +45,24 @@ body.theme-light {
   --divider-color: rgba(22, 78, 99, 0.1);
 }
 
+/* Nature Theme (Biophilic & Relaxing) */
+body.theme-nature {
+  --bg-color: #FDFBF7;
+  --bg-gradient: radial-gradient(circle at top right, #F5F0E1, #FDFBF7);
+  --text-primary: #1F2937;
+  --text-secondary: #4B5563;
+  --tile-bg: rgba(255, 255, 255, 0.85);
+  --tile-border: rgba(229, 231, 235, 0.4);
+  --tile-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --accent-color: #059669;
+  /* Soft Forest Green */
+  --sidebar-bg: linear-gradient(to right, rgba(5, 150, 105, 0.03), transparent);
+  --nav-active-bg: rgba(5, 150, 105, 0.08);
+  /* Soft green active state */
+  --icon-inactive: rgba(107, 114, 128, 0.6);
+  --divider-color: rgba(229, 231, 235, 0.6);
+}
+
 body {
   margin: 0;
   display: flex;
@@ -53,7 +71,8 @@ body {
   background: var(--bg-gradient);
   background-attachment: fixed;
   color: var(--text-primary);
-  transition: var(--theme-transition);
+  /* Apply transitions ONLY to body properties directly, do not let every child inherit transition delays */
+  transition: background-color 0.5s ease, background-image 0.5s ease;
 }
 
 h1 {
