@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/SomonGitHub/hacs-nexura/master/docs/images/Capture d'écran Nexura 1.png" alt="Nexura Dashboard Desktop View" width="100%"/>
+  <img src="https://github.com/user-attachments/assets/10825c5c-6b7b-45da-be33-48f60f3bc58a" alt="Nexura Dashboard Desktop View" width="100%"/>
 </p>
 
 <p align="center">
@@ -11,6 +11,31 @@
 Nexura est une intégration personnalisée (Custom Component) pour Home Assistant offrant un **tableau de bord nouvelle génération**. Conçu avec React et la philosophie "Bento UI", il propose une interface utilisateur fluide, moderne (Glassmorphism), hautement personnalisable et **totalement responsive**.
 
 ## 🌟 Fonctionnalités Principales
+
+*    🎨 **Des thèmes** Dark, light et Nature pour plaire a tout le monde ! et d'autres arrivent...
+<table>
+  <tr>
+    <td width="33%">
+      <b>Thème DARK</b><br>
+      <img src="https://github.com/user-attachments/assets/10825c5c-6b7b-45da-be33-48f60f3bc58a" alt="Nexura theme dark"/>
+    </td>
+    <td width="33%">
+      <b>Thème Light</b><br>
+      <p align="center">
+        <img src="https://github.com/user-attachments/assets/e98bd209-3460-4bc9-b6ef-c0fb0e616ace" alt="Nexura theme light"/>
+      </p>
+    </td>
+    <td width="33%">
+      <b>Thème Nature</b><br>
+      <p align="center">
+        <img src="https://github.com/user-attachments/assets/8dea6433-e191-4d48-b1fc-23ffec1d9ffd" alt="nature" />
+      </p>
+    </td>
+  </tr>
+</table>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/SomonGitHub/hacs-nexura/master/docs/images/Capture d'écran Nexura 3.png" alt="Nexura Dashboard Desktop View" width="100%"/>
+</p>
 
 *   📱 **Agencements Indépendants (Multi-Layout)** : Nexura enregistre la disposition de vos tuiles séparément pour vos écrans de **Bureau**, **Tablette** et **Mobile**. Ce que vous modifiez sur votre téléphone n'affecte pas l'arrangement de votre grand écran mural !
 *   ⚡ **Drag and Drop**
