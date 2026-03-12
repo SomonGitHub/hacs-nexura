@@ -8,6 +8,8 @@
 
 # Nexura Dashboard
 
+<a href="https://www.buymeacoffee.com/simonv" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 Nexura est une intégration personnalisée (Custom Component) pour Home Assistant offrant un **tableau de bord nouvelle génération**. Conçu avec React et la philosophie "Bento UI", il propose une interface utilisateur fluide, moderne (Glassmorphism), hautement personnalisable et **totalement responsive**.
 
 ## 🌟 Fonctionnalités Principales
@@ -127,3 +129,6 @@ Vous pouvez forcer Nexura à utiliser le mode Clair, le mode Sombre, ou à suivr
 L'intégration est écrite en :
 - Backend : **Python** (Composant natif utilisant l'API WebSocket de Home Assistant).
 - Frontend : **React 18** avec **TypeScript** et Vite pour un rendu instantané et une gestion optimisée. Le Drag&Drop est géré via `@dnd-kit`.
+
+<a href="https://www.buymeacoffee.com/simonv" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
